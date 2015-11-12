@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+
+{% block admin_content %}
+
+<div class="col-md-12">
+	<h2>User List</h2>
+	<table class="table table-striped" style="width:100%">
+		<tr>
+			<th>id</th>
+			<th>User Name</th>
+		    <th>Email</th> 
+		    <th>Is Active</th>
+		    <th>Last Login</th>
+		    <th>User Role</th>
+		    <th>Edit</th>
+		</tr>
+		{% for user in users %}
+		<tr>
+	    	<th>{{ user.id }}</th>
+	    	<th>{{ user.username }}</th>
+	    	<th>{{ user.email }}</th>
+	    	<th>{{ user.is_active() }}</th>
+	    	<th>{{ user.last_seen }}</th>
+		    <th>{{ user.role.name }}</th>
+		    <th><a href="{{ url_for('admin.edit_user', user_id=user.id) }}">Edit</a></th>
+	  	</tr>
+    	{% endfor %}
+	</table>
+</div>
+
+{% endblock %}

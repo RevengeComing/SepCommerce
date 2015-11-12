@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+<div class="page-header">
+	<h1>{{ user.username }}'s Profile</h1>
+</div>
+
+<div class="col-sm-4 userAvatar"><img src="{{ user.avatar(size=256) }}"></div>
+<div class="col-sm-8"> 
+	<p>User Name: {{ user.username }}</p>
+</div>
+
+{% endblock %}

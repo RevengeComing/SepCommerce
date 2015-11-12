@@ -1,0 +1,22 @@
+{% extends "admin/base.html" %}
+
+{% block admin_content %}
+
+<div class="col-md-9">
+	<h2>Group List</h2>
+	<table style="width:100%">
+		<tr>
+			<th>id</th>
+			<th>Name</th>
+		</tr>
+		{% for grp in grps %}
+		<tr>
+	    	<td>{{ grp.id }}</td>
+	    	<td>{{ grp.groupname }}</td>
+	  	</tr>
+    	{% endfor %}
+	</table>
+</div>
+<a class="btn btn-default" href="{{ url_for('admin.group_add_new') }}">Add New Group</a>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from "_macros.html" import render_field %}
+{% block title %}GramoTune - Login{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Login</h1>
+</div>
+<div class="col-md-4">
+<form method=post action="/auth/login">
+  <dl>
+    {{ render_field(form.email) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.remember_me) }}
+    {{ render_field(form.submit) }}
+  </dl>
+</form>
+    <br>
+    <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+{% block page_content %}
+
+<div class="page-header">
+	<h1>Admin Panel</h1>
+</div>
+<div class="col-sm-9">
+{% block admin_content %}{% endblock %}
+</div>
+<div class="col-sm-3">
+	<ul lass="nav bs-docs-sidenav">
+		<li><a href="{{ url_for('admin.user_list') }}">User List</a></li>
+		<li><a href="{{ url_for('admin.genre_list') }}">Genre List</a></li>
+		<li><a href="{{ url_for('admin.album_list') }}">Album List</a></li>
+		<li><a href="{{ url_for('admin.music_list') }}">Music List</a></li>
+	</ul>
+</div>
+{% endblock %}

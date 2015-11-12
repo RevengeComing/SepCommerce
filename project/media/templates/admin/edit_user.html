@@ -1,0 +1,22 @@
+{% extends "admin/base.html" %}
+
+{% block admin_content %}
+
+<div class="col-md-12">
+	<h2>User : {{user.username}}</h2>
+</div>
+<form action="" method="POST">
+	<label>username :</label><br>
+	<input type="text" name="username" value="{{user.username}}"><br><br>
+	<label>Email Address :</label><br>
+	<input type="text" name="email" value="{{user.email}}"><br><br>
+	<label>Is Confirmed ?</label><input type="checkbox" name="confirmed" {%if user.confirmed %}checked{%endif%}><br><br>
+	<select name="role_id">
+		{% for role in roles %}
+		<option value="{{role.id}}" {%if user.role_id == role.id %}selected{%endif%}>{{role.name}}</option>
+		{%endfor%}
+	</select><br><br>
+	<input type="submit">
+</form>
+
+{% endblock %}

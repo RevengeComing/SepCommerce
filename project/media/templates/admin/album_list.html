@@ -1,0 +1,39 @@
+{% extends "admin/base.html" %}
+
+{% block admin_content %}
+
+<div class="col-md-12">
+	<h2>User List</h2>
+	<table class="table table-striped" style="width:100%">
+		<tr>
+			<th>id</th>
+			<th>Name</th>
+		    <th>Artists</th> 
+		    <th>Price</th>
+		    <th>Musics</th>
+		    <th>Genre</th>
+		</tr>
+		{% for album in albums %}
+		<tr>
+	    	<td>{{ album.id }}</td>
+	    	<td>{{ album.name }}</td>
+	    	<td>{% for artist in album.artists %}{{artist.username}} {%endfor%}</td>
+	    	<td>{{ album.price }}</td>
+	    	<td>{% for music in album.musics %}{{music.name}} ,{%endfor%}</td>
+	    	<td>{{ album.genre.name }}</td>
+	  	</tr>
+    	{% endfor %}
+    	<tr>
+    		<td>{% if group %}
+    			{{ group.groupname }}
+    			{% endif %}
+    		</td>
+    		<td>{% if user %}
+    			{{ user.username }}
+    			{% endif %}
+    		</td>
+    	</tr>
+	</table>
+</div>
+
+{% endblock %}
