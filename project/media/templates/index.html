@@ -5,10 +5,76 @@
 {%- endblock css %}
 
 {% block content -%}
-<div class="row">
+{# <div class="row">
 	<div class="small-12 columns">
 		<h1>Sepehr Demo</h1>
 	</div>
+</div> #}
+<div class="row">
+	<div class="medium-12 columns">
+		<ul class="example-orbit-content" data-orbit>
+		  <li>
+		    <img src="{{url_for('static', filename='img/slider/5.jpg')}}" alt="slide 1" />
+	{# 	    <div class="orbit-caption">
+		      Caption One.
+		    </div> #}
+		  </li>
+		  <li class="active">
+		    <img src="{{url_for('static', filename='img/slider/6.jpg')}}" alt="slide 2" />
+	{# 	    <div class="orbit-caption">
+		      Caption Two.
+		    </div> #}
+		  </li>
+		  <li>
+		    <img src="{{url_for('static', filename='img/slider/7.jpg')}}" alt="slide 3" />
+	{# 	    <div class="orbit-caption">
+		      Caption Three.
+		    </div> #}
+		  </li>
+		</ul>
+	</div>
+{# 	<div class="medium-3 columns">
+		
+	</div> #}		
+</div>
+<div class="row">
+	<nav id="toppest" class="top-bar" data-topbar role="navigation">
+
+      <section class="top-bar-section">
+        <ul class="left">
+            <li class="has-dropdown">
+                <a href="#">Browse Store</a>
+                <ul class="dropdown">
+                    <li><a href="#">All Products</a></li>
+                    <li class="has-dropdown">
+                    	<a href="#">For Category 1</a>
+                    	<ul class="dropdown">
+                    		<li><a href="#">KIR</a></li>
+                    		<li><a href="#">KOS</a></li>
+                    	</ul>
+                    </li>
+                    <li class="has-dropdown">
+                    	<a href="#">For Category 2</a>
+                    	<ul class="dropdown">
+                    		<li><a href="#">KIR</a></li>
+                    		<li><a href="#">KOS</a></li>
+                    	</ul>
+                    </li>
+                    <li class="has-dropdown">
+                    	<a href="#">For Category 3</a>
+                    	<ul class="dropdown">
+                    		<li><a href="#">KIR</a></li>
+                    		<li><a href="#">KOS</a></li>
+                    	</ul>
+                    </li>
+                    <li><a href="#">Offers</a></li>
+                </ul>
+            </li>
+        </ul>
+      </section>
+    </nav>
+    <div class="medium-12 columns" id="index-inside"></div>
+	
 </div>
 {%- endblock content %}
 

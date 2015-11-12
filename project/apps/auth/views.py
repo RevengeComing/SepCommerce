@@ -36,6 +36,10 @@ def login():
             if current_user.role.name == 'Administrator':
                 return redirect(url_for('admin.index'))
             return redirect(request.args.get('next') or url_for('main.index', username=current_user.username))
+        else:
+            return render_template('auth/login.html',
+                                   form=form,
+                                   error_message='Username or password is wrong.')
     return render_template('auth/login.html', form=form)
 
 

@@ -9,14 +9,18 @@ class Product(db.Model):
     price = db.Column(db.Integer)    
     category_id = db.Column(db.Integer, db.ForeignKey('product_categories.id'))
     count = db.Column(db.Integer)
+    offer = db.Column(db.Integer)
 
-    category = db.relationship('ProductCategory', backref='product', lazy='dynamic')
+    category = db.relationship('ProductCategory', backref='products', lazy='dynamic')
 
 
 class ProductCategory(db.Model):
 	__tablename__ = 'product_categories'
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(64), unique=True)
+	parent_id = db.Colmn(db.Integer, db.ForeignKey('product_categories.id'))
+
+	parent = db.relationship('ProductCategory', backref='childs', lazy="dynamic")
 
 
 class Order(db.Model):

@@ -1,10 +1,8 @@
-from flask import render_template, flash, redirect, url_for, Blueprint, request
+from flask import render_template, flash, redirect, url_for, request
 from project.apps.main.decorators import admin_required
 from project.apps.auth.models import User, Role
 from project.extensions import db
-
-mod = Blueprint('admin', __name__, url_prefix='/admin')
-
+from . import mod
 
 @mod.route('/panel')
 @admin_required

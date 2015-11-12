@@ -18,9 +18,9 @@
         {# <script src="{{ url_for('static',filename='js/foundation/foundation.abide.js') }}"></script>
         <script src="{{ url_for('static',filename='js/foundation/foundation.accordion.js') }}"></script>
         <script src="{{ url_for('static',filename='js/foundation/foundation.alert.js') }}"></script>
-        <script src="{{ url_for('static',filename='js/foundation/foundation.clearing.js') }}"></script>
-        <script src="{{ url_for('static',filename='js/foundation/foundation.dropdown.js') }}"></script>
-        <script src="{{ url_for('static',filename='js/foundation/foundation.equalizer.js') }}"></script>
+        <script src="{{ url_for('static',filename='js/foundation/foundation.clearing.js') }}"></script> #}
+        {# <script src="{{ url_for('static',filename='js/foundation/foundation.dropdown.js') }}"></script> #}
+        {# <script src="{{ url_for('static',filename='js/foundation/foundation.equalizer.js') }}"></script>
         <script src="{{ url_for('static',filename='js/foundation/foundation.interchange.js') }}"></script>
         <script src="{{ url_for('static',filename='js/foundation/foundation.joyride.js') }}"></script>
         <script src="{{ url_for('static',filename='js/foundation/foundation.js') }}"></script>
@@ -59,18 +59,35 @@
 
             <!-- Left Nav Section -->
             {% if current_user.is_authenticated %}
-            <ul class="left has-dropdown">
-                <li class="has-dropdown">
-                    <a href="#">hello {{current_user.username}}</a>
-                    <ul class="dropdown">
-                        <li><a href="#">My Profile</a></li>
-                        <li><a href="#">Wish List</a></li>
-                        <li><a href="#">My Orders</a></li>
-                        <li><a href="#">My Messages</a></li>
-                        <li><a href="{{url_for('auth.logout')}}">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
+                {% if current_user.role.name == "Administrator" %}
+                <ul class="left has-dropdown">
+                    <li class="has-dropdown">
+                        <a href="#">hello {{current_user.username}}</a>
+                        <ul class="dropdown">
+                            <li><a href="{{url_for('admin.index')}}">Admin Panel</a></li>
+                            <li><a href="#">My Messages</a></li>
+                            <li><a href="{{url_for('auth.logout')}}">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul> 
+
+                {% else %}
+                <ul class="left has-dropdown">
+                    <li class="has-dropdown">
+                        <a href="#">hello {{current_user.username}}</a>
+                        <ul class="dropdown">
+                            <li><a href="#">My Profile</a></li>
+                            <li><a href="#">Wish List</a></li>
+                            <li><a href="#">My Orders</a></li>
+                            <li><a href="#">My Messages</a></li>
+                            <li><a href="{{url_for('auth.logout')}}">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>     
+                {% endif %}      
+            <ul class="right">
+                <li><a href="#">Basket: 0.0 Rial</a></li>
+            </ul> 
             {% else %}
             <ul class="left">
                 <li><a href="{{url_for('auth.login')}}" title="">Login/Register</a></li>

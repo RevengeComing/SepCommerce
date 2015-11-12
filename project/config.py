@@ -9,8 +9,9 @@ class DefaultConfig(object):
     # Blueprint haye nasb shode dar app bayad be in list ezafe beshan
     INSTALLED_BLUEPRINTS = (
         'auth',
+        'ecommerce',
         'admin',
-        'main'
+        'main',
     )
 
     MAIL_SERVER = 'smtp.googlemail.com'
@@ -25,6 +26,7 @@ class DefaultConfig(object):
 
     CACHE_TYPE = 'filesystem'
     CACHE_DIR = "/tmp/cache"
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
 
