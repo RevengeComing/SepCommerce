@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from project.application import create_app
 from project.config import DevelopmentConfig
-from project.apps.auth.models import User, Role, Permission, Group
+from project.apps.auth.models import User, Role, Permission
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
 from project.extensions import db
@@ -15,7 +15,7 @@ migrate = Migrate(application, db)
 
 def make_shell_context():
     return dict(application=application, db=db, User=User, Role=Role,
-                Permission=Permission, Group=Group)
+                Permission=Permission)
 
 manager.add_command("shell", Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)

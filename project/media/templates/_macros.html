@@ -10,3 +10,18 @@
   {% endif %}
   </dd>
 {% endmacro %}
+
+{% macro header_categories(category) %}
+    {% if category.childs %}
+    <li class="has-dropdown">
+        <a href="#">{{category.name}}</a>
+        <ul class="dropdown">
+            {% for child in category.childs %}
+            {{ header_categories(child) }}
+            {% endfor %}
+        </ul>
+    </li>
+    {% else %}    
+    <li><a href="#">{{category.name}}</a></li>
+    {% endif %}
+{% endmacro %}

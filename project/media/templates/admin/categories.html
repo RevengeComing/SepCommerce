@@ -3,29 +3,22 @@
 {% block admin_content %}
 
 <div class="medium-12">
-	<h2>User List</h2>
+	<h2>Categories</h2>
 	<table class="table table-striped" style="width:100%">
 		<tr>
 			<th>id</th>
-			<th>User Name</th>
-		    <th>Email</th> 
-		    <th>Is Active</th>
-		    <th>Last Login</th>
-		    <th>User Role</th>
-		    <th>Edit</th>
+			<th>Name</th>
+		    <th>Parent Name</th>
 		</tr>
-		{% for user in users %}
+		{% for category in categories %}
 		<tr>
-	    	<th>{{ user.id }}</th>
-	    	<th>{{ user.username }}</th>
-	    	<th>{{ user.email }}</th>
-	    	<th>{{ user.is_active() }}</th>
-	    	<th>{{ user.last_seen }}</th>
-		    <th>{{ user.role.name }}</th>
-		    <th><a href="{{ url_for('admin.edit_user', user_id=user.id) }}">Edit</a></th>
+	    	<th>{{ category.id }}</th>
+	    	<th>{{ category.name }}</th>
+	    	<th>{{ category.parent.name }}</th>
 	  	</tr>
     	{% endfor %}
 	</table>
+	<a class="button" href="{{url_for('admin.add_category')}}">Add Category</a>
 </div>
 
 {% endblock %}

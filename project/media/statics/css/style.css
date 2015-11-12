@@ -1,8 +1,8 @@
 #toppest {
-	background-color: green; 
+	background-color: #383961; 
 }
 .top-bar-section li:not(.has-form) a:not(.button) {
-	background: green;
+	background: #383961;
 }
 .orbit-bullets-container {
 	display: none;
@@ -14,4 +14,7 @@ body {
 	background-color: white;
 	min-height: 400px;
 	/*border: 1px solid black;*/
+}
+.top-bar-section .dropdown li:not(.has-form):not(.active) > a:not(.button) {
+	background-color:#383961;
 }

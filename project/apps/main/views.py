@@ -3,6 +3,7 @@ from flask import (render_template, redirect, url_for, abort, flash, request,
 from flask.ext.login import login_required, current_user
 from project.extensions import db
 from project.apps.auth.models import Permission, Role, User
+from project.apps.ecommerce.models import ProductCategory
 import json
 import random
 from .decorators import admin_required, permission_required
@@ -12,7 +13,8 @@ mod = Blueprint('main', __name__, url_prefix='/')
 
 @mod.route('')
 def index():
-    return render_template('index.html')
+	categories = ProductCategory.query.filter_by(parent_id=None)
+	return render_template('index.html', categories=categories)
 
 
 # @mod.route('user/<username>')

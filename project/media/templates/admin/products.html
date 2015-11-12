@@ -1,0 +1,30 @@
+{% extends "admin/base.html" %}
+
+{% block admin_content %}
+
+<div class="medium-12">
+	<h2>Product List</h2>
+	<table class="table table-striped" style="width:100%">
+		<tr>
+			<th>id</th>
+			<th>Name</th>
+		    <th>Category</th>
+		    <th>Price</th>
+		    <th>Count</th>
+		    <th>Offer</th>
+		</tr>
+		{% for product in products %}
+		<tr>
+	    	<th>{{ product.id }}</th>
+	    	<th>{{ product.name }}</th>
+	    	<th>{{ product.category.name }}</th>
+	    	<th>{{ product.price }}</th>
+	    	<th>{{ product.count }}</th>
+	    	<th>{{ product.Offer }}</th>
+	  	</tr>
+    	{% endfor %}
+	</table>
+	<a class="button" href="{{url_for('admin.add_category')}}">Add Product</a>
+</div>
+
+{% endblock %}

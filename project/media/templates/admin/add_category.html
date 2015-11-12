@@ -1,0 +1,18 @@
+{% extends "admin/base.html" %}
+{% block admin_content %}
+
+<div class="medium-9 columns">
+	<form method="POST" action="">
+	    <label>Name<input type="text" name="name" value=""></label>
+	    <label>Parent
+	    	<select name="parent" multiple>
+	    		{% for category in categories %}
+	    		<option value={{category.id}}>{{category.name}}</option>
+	    		{% endfor %}
+	    	</select>
+	    </label>
+		<button type="submit">Submit</button>
+	</form>
+</div>
+
+{% endblock%}

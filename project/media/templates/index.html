@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "_macros.html" import header_categories %}
 {% block title %} | Home{% endblock %}
 {%- block css %}
 <!-- Bootstrap -->
@@ -46,27 +47,9 @@
                 <a href="#">Browse Store</a>
                 <ul class="dropdown">
                     <li><a href="#">All Products</a></li>
-                    <li class="has-dropdown">
-                    	<a href="#">For Category 1</a>
-                    	<ul class="dropdown">
-                    		<li><a href="#">KIR</a></li>
-                    		<li><a href="#">KOS</a></li>
-                    	</ul>
-                    </li>
-                    <li class="has-dropdown">
-                    	<a href="#">For Category 2</a>
-                    	<ul class="dropdown">
-                    		<li><a href="#">KIR</a></li>
-                    		<li><a href="#">KOS</a></li>
-                    	</ul>
-                    </li>
-                    <li class="has-dropdown">
-                    	<a href="#">For Category 3</a>
-                    	<ul class="dropdown">
-                    		<li><a href="#">KIR</a></li>
-                    		<li><a href="#">KOS</a></li>
-                    	</ul>
-                    </li>
+                    {% for category in categories %} 
+                    {{header_categories(category)}}                 
+                    {% endfor %}
                     <li><a href="#">Offers</a></li>
                 </ul>
             </li>
