@@ -1,0 +1,11 @@
+{% extends "admin/base.html" %}
+{% block admin_content %}
+
+<div class="medium-9 columns">
+	<form method="POST" action="">
+	    <label>Name<input type="text" name="name" value={% if city%}"{{city.name}}"{%else%}""{%endif%}></label>
+		<button type="submit">Submit</button>
+	</form>
+</div>
+
+{% endblock%}

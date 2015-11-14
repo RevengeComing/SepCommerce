@@ -1,0 +1,27 @@
+{% extends "admin/base.html" %}
+
+{% block admin_content %}
+
+<div class="medium-12">
+	<h2>Categories</h2>
+	<table class="table table-striped" style="width:100%">
+		<tr>
+			<th>id</th>
+			<th>Name</th>
+			<th>Settings</th>
+		</tr>
+		{% for city in cities %}
+		<tr>
+	    	<th>{{ city.id }}</th>
+	    	<th>{{ city.name }}</th>
+	    	<th>
+	    		<a href="{{url_for('admin.remove_city', id=city.id)}}" title="">Remove</a>
+	    		<a href="{{url_for('admin.edit_city', id=city.id)}}" title="">Edit</a>
+	    	</th>
+	  	</tr>
+    	{% endfor %}
+	</table>
+	<a class="button" href="{{url_for('admin.add_city')}}">Add City</a>
+</div>
+
+{% endblock %}

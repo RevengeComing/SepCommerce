@@ -5,7 +5,7 @@ from project.apps.admin import mod as adminPanel
 from project.apps.ecommerce import mod
 
 from project.apps.main.decorators import admin_required
-from project.apps.ecommerce.models import ProductCategory, Product
+from project.apps.ecommerce.models import ProductCategory, Product, City
 from project.apps.ecommerce.utils import allowed_file
 from project.extensions import db
 
@@ -14,6 +14,14 @@ from project.extensions import db
 def categories():
 	categories = ProductCategory.query.order_by(ProductCategory.id)
 	return render_template('admin/categories.html', categories=categories)
+
+@adminPanel.route('/categories/remove/<id>')
+@admin_required
+def remove_category(id):
+	category = ProductCategory.query.filter_by(id=id).first()
+	db.session.delete(category)
+	db.session.commit()
+	return redirect(url_for('admin.categories'))
 
 @adminPanel.route('/categories/add', methods=["POST", "GET"])
 @admin_required
@@ -61,7 +69,70 @@ def add_product():
 			filename = str(product.id)
 			image.save(os.path.realpath("project/media/statics/img/products/") +"/"+ filename)
 			product.image = "/statics/img/products/" + filename
-			db.session.commit()
+		db.session.commit()
 
 		return redirect(url_for('admin.products'))
 	return render_template('admin/add_product.html', categories=categories)
+
+@adminPanel.route('/products/<id>', methods=["POST", "GET"])
+@admin_required
+def edit_product(id):
+	categories = ProductCategory.query.filter_by(childs=None)
+	product = Product.query.filter_by(id=id).first()
+	if request.method == "POST":
+		product.name = request.form["name"]
+		product.price = int(request.form["price"])
+		product.count = int(request.form["count"])
+		try:
+			offer = int(request.form.get("offer"))
+		except:
+			offer = 0
+		print request.form["parent"]
+		product.category_id = int(request.form["parent"])
+		image = request.files.get('image')
+		if image and allowed_file(image.filename):
+			filename = str(product.id)
+			image.save(os.path.realpath("project/media/statics/img/products/") +"/"+ filename)
+			product.image = "/statics/img/products/" + filename
+		db.session.commit()
+		return redirect(url_for('admin.products'))
+
+	return render_template('admin/edit_product.html', product=product, categories=categories)
+
+@adminPanel.route('/cities')
+@admin_required
+def cities_list():
+	cities = City.query.order_by(City.id)
+	return render_template('admin/cities.html', cities=cities)
+
+@adminPanel.route('/cities/add', methods=["POST", "GET"])
+@admin_required
+def add_city():
+	if request.method == "POST":
+		name = request.form["name"]
+		city = City(name=name)
+		db.session.add(city)
+		db.session.commit()
+		return redirect(url_for('admin.cities_list'))
+	return render_template('admin/add_city.html')
+
+@adminPanel.route('/cities/remove/<id>')
+@admin_required
+def remove_city(id):
+	city = City.query.filter_by(id=id).first()
+	db.session.delete(city)
+	db.session.commit()
+	return redirect(url_for('admin.cities_list'))
+
+@adminPanel.route('/cities/edit/<id>', methods=["POST", "GET"])
+@admin_required
+def edit_city(id):
+	city = City.query.filter_by(id=id).first()
+	if request.method == "POST":
+		name = request.form["name"]
+		city.name = name
+		db.session.commit()
+		return redirect(url_for('admin.cities_list'))
+	return render_template('admin/add_city.html', city=city)
+
+

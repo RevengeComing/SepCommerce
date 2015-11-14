@@ -9,10 +9,10 @@ from project.extensions import db, login_manager
 
 
 class Permission:
-    FOLLOW = 0x01
-    UPLOAD_MUSIC = 0x02
-    MODERATE_MUSICS = 0x04
-    ADD_SHOW = 0x08
+    BUY = 0x01
+    # UPLOAD_MUSIC = 0x02
+    # MODERATE_MUSICS = 0x04
+    # ADD_SHOW = 0x08
     ADMINISTER = 0x80
 
 
@@ -27,15 +27,8 @@ class Role(db.Model):
     @staticmethod
     def insert_roles():
         roles = {
-            'User': (Permission.FOLLOW , True),
-            'Artist': (Permission.FOLLOW |
-                         Permission.UPLOAD_MUSIC , False),
-            'Producer': (Permission.FOLLOW |
-                         Permission.UPLOAD_MUSIC , False),
-            'Moderator': (Permission.FOLLOW |
-                          Permission.MODERATE_MUSICS , False),
-            'ShowMan': (Permission.FOLLOW |
-                          Permission.ADD_SHOW , False),
+            'User': (Permission.BUY , True),
+            'Special User': (Permission.BUY , False),
             'Administrator': (0xff, False)
         }
         for r in roles:
@@ -91,14 +84,16 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), unique=True, index=True)
-    role_id = db.Column(db.Integer, db.ForeignKey('roles.id')) # 1Moderator 2Admin 3User 4Producer 5Artist
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(128))
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
     join_date = db.Column(db.DateTime(), default=datetime.utcnow)
     confirmed = db.Column(db.Boolean, default=False)
     avatar_hash = db.Column(db.String(32))
-    avatar_img = db.Column(db.String(64))
-    cover = db.Column(db.String(64), nullable=True)
+    title = db.Column(db.Integer)
+    first_name = db.Column(db.String(128))
+    last_name = db.Column(db.String(128))
+    city = db.Column(db.Integer, db.ForeignKey('cities.id'))
 
     @staticmethod
     def generate_fake(count=100):
@@ -132,11 +127,13 @@ class User(UserMixin, db.Model):
     def password(self):
         raise AttributeError('password is not a readable attribute')
 
-    def set_avatar():
-        pass
-
-    def set_cover():
-        pass
+    def get_title(self):
+        if self.title == 1:
+            return "Mr"
+        elif self.title == 2:
+            return "Miss"
+        elif self.title == 3:
+            return "Mrs"
 
     def is_active(self):
         if self.confirmed == True:

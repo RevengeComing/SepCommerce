@@ -86,7 +86,9 @@
                 </ul>     
                 {% endif %}      
             <ul class="right">
+                {%if not current_user.role_id == 1 %}
                 <li><a href="#">Basket: 0.0 Rial</a></li>
+                {% endif %}                
             </ul> 
             {% else %}
             <ul class="left">

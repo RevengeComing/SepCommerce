@@ -6,15 +6,13 @@ from project.apps.auth.models import Permission, Role, User
 from project.apps.ecommerce.models import ProductCategory
 import json
 import random
+from . import mod
 from .decorators import admin_required, permission_required
 from  sqlalchemy.sql.expression import func, select
 
-mod = Blueprint('main', __name__, url_prefix='/')
-
 @mod.route('')
 def index():
-	categories = ProductCategory.query.filter_by(parent_id=None)
-	return render_template('index.html', categories=categories)
+	return render_template('index.html')
 
 
 # @mod.route('user/<username>')

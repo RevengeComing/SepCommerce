@@ -47,17 +47,35 @@
                 <a href="#">Browse Store</a>
                 <ul class="dropdown">
                     <li><a href="#">All Products</a></li>
-                    {% for category in categories %} 
+                    {% for category in index_categories() %} 
                     {{header_categories(category)}}                 
                     {% endfor %}
                     <li><a href="#">Offers</a></li>
                 </ul>
             </li>
         </ul>
+        <ul class="right">
+        	<li><input type="text" placeholder="Search"></input></li>
+        	
+        	<li><button>Search</button></li>
+        </ul>
       </section>
     </nav>
-    <div class="medium-12 columns" id="index-inside"></div>
-	
+    <div class="medium-12 columns" id="index-inside">
+    	<hr>
+    	<ul class="medium-block-grid-5 small-block-grid-2">
+    		{% for product in index_products() %}    			
+		  	<li>
+		  		<img class="th" src="{{product.image}}">
+		  		<p>{{product.name}}</p>
+		  		<p>{{product.price}} Rial</p>
+		  		<a href="#" class="button" title="">Add To Basket</a>
+		  	</li>
+
+    		{% endfor %}
+		</ul>
+    </div>
+		
 </div>
 {%- endblock content %}
 

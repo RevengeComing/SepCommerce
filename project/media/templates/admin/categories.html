@@ -9,12 +9,19 @@
 			<th>id</th>
 			<th>Name</th>
 		    <th>Parent Name</th>
+		    <th>settings</th>
 		</tr>
 		{% for category in categories %}
 		<tr>
 	    	<th>{{ category.id }}</th>
 	    	<th>{{ category.name }}</th>
 	    	<th>{{ category.parent.name }}</th>
+	    	<th>
+	    		{% if not category.childs %}
+	    		<a href="{{url_for('admin.remove_category', id=category.id)}}">Remove</a>
+	    		{% endif %}
+	    		<a>Edit</a>
+	    	</th>
 	  	</tr>
     	{% endfor %}
 	</table>

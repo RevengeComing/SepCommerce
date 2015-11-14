@@ -15,9 +15,10 @@
 		    <th>Image</th>
 		</tr>
 		{% for product in products %}
+
 		<tr>
 	    	<th>{{ product.id }}</th>
-	    	<th>{{ product.name }}</th>
+	    	<th><a href="{{url_for('admin.edit_product', id=product.id)}}">{{ product.name }}</a></th>
 	    	<th>{{ product.category.name }}</th>
 	    	<th>{{ product.price }}</th>
 	    	<th>{{ product.count }}</th>

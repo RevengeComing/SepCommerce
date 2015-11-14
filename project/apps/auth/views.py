@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, current_app
 from flask.ext.login import login_user, logout_user, login_required, \
     current_user
 from . import mod
@@ -21,8 +21,6 @@ def before_request():
 
 @mod.route('/unconfirmed')
 def unconfirmed():
-    # if current_user.is_anonymous or current_user.confirmed:
-    #     return redirect(url_for('main.index'))
     return render_template('auth/unconfirmed.html')
 
 
