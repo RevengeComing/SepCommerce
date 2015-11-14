@@ -17,8 +17,11 @@ class DefaultConfig(object):
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
+
+    # this email is only for testing this software.
     MAIL_USERNAME = "gramatune@gmail.com"
     MAIL_PASSWORD = "nimasepehr123"
+
     MAIL_SUBJECT_PREFIX = "[SepCommerce]"
     MAIL_SENDER = "SepCommerce Admin <gramatune@gmail.com>"
 
@@ -26,8 +29,10 @@ class DefaultConfig(object):
 
     CACHE_TYPE = 'filesystem'
     CACHE_DIR = "/tmp/cache"
-    SQLALCHEMY_TRACK_MODIFICATIONS = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    UPLOAD_FOLDER = 'media/statics/uploads'
+    ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 
 class DeploymentConfig(DefaultConfig):

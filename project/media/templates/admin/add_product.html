@@ -1,0 +1,32 @@
+{% extends "admin/base.html" %}
+{% block admin_content %}
+
+<div class="medium-9 columns">
+	<form method="POST" action="" enctype="multipart/form-data">
+	    <label>Name<input type="text" name="name" value=""></label>
+	    <label>Price<input type="text" name="price" value=""></label>
+	    <label>Count<input type="text" name="count" value=""></label>
+	    <label>Offer<input type="text" name="offer" value=""></label>
+	    <label>Image<input type="file" name="image" value=""></label>
+	    <label>Category
+	    	<select name="parent" multiple>
+	    		{% for category in categories %}
+	    		
+	    			{% if category.parent != None %}
+	    				{% if category.parent.parent != None %}
+	    		<option value={{category.id}}>{{category.parent.parent.name}}/{{category.parent.name}}/{{category.name}}</option>
+	    				{% else %}
+	    		<option value={{category.id}}>{{category.parent.name}}/{{category.name}}</option>
+	    				{% endif %}
+	    			{% else %}
+	    		<option value={{category.id}}>{{category.name}}</option>
+	    			{% endif %}
+
+	    		{% endfor %}
+	    	</select>
+	    </label>
+		<button type="submit">Submit</button>
+	</form>
+</div>
+
+{% endblock%}

@@ -12,6 +12,7 @@
 		    <th>Price</th>
 		    <th>Count</th>
 		    <th>Offer</th>
+		    <th>Image</th>
 		</tr>
 		{% for product in products %}
 		<tr>
@@ -20,11 +21,12 @@
 	    	<th>{{ product.category.name }}</th>
 	    	<th>{{ product.price }}</th>
 	    	<th>{{ product.count }}</th>
-	    	<th>{{ product.Offer }}</th>
+	    	<th>{{ product.offer }}</th>
+	    	<th style="max-width:100px"><img src="{{product.image}}" alt=""></th>
 	  	</tr>
     	{% endfor %}
 	</table>
-	<a class="button" href="{{url_for('admin.add_category')}}">Add Product</a>
+	<a class="button" href="{{url_for('admin.add_product')}}">Add Product</a>
 </div>
 
 {% endblock %}

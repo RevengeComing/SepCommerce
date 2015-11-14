@@ -9,7 +9,8 @@ class Product(db.Model):
     price = db.Column(db.Integer)    
     category_id = db.Column(db.Integer, db.ForeignKey('product_categories.id'))
     count = db.Column(db.Integer)
-    offer = db.Column(db.Integer)
+    offer = db.Column(db.Integer, default=0)
+    image = db.Column(db.String(128))
 
     category = db.relationship('ProductCategory', backref='products', lazy='joined')
 
