@@ -4,4 +4,4 @@ from project.config import DevelopmentConfig
 app = create_app(DevelopmentConfig)
 
 if __name__ == "__main__":
-    app.run(port=4000, host="0.0.0.0" ,threaded=True)
+    app.run(port=80, host="0.0.0.0" ,threaded=True)

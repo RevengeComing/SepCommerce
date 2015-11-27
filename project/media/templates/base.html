@@ -13,7 +13,7 @@
         <script src="{{ url_for('static',filename='js/vendor/jquery.js') }}"></script>
         {# <script src="{{ url_for('static',filename='js/vendor/jquery.cookie.js') }}"></script>
         <script src="{{ url_for('static',filename='js/vendor/placeholder.js') }}"></script> #}
-        <script src="{{ url_for('static',filename='js/core.js') }}"></script> 
+        <script src="{{ url_for('static',filename='js/core.js') }}"></script>
         <script src="{{ url_for('static',filename='js/foundation.min.js') }}"></script>
         {# <script src="{{ url_for('static',filename='js/foundation/foundation.abide.js') }}"></script>
         <script src="{{ url_for('static',filename='js/foundation/foundation.accordion.js') }}"></script>
@@ -34,7 +34,9 @@
         <script src="{{ url_for('static',filename='js/foundation/foundation.topbar.js') }}"></script> #}
         {% block js_head %}{% endblock %}
     </head>
-    <body>        
+    <body>
+        <div id="notification">
+        </div>
         <nav id="toppest" class="top-bar" data-topbar role="navigation">
           <ul class="title-area">
             <li class="name">

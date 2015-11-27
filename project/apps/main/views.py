@@ -10,6 +10,7 @@ from . import mod
 from .decorators import admin_required, permission_required
 from  sqlalchemy.sql.expression import func, select
 
+
 @mod.route('')
 def index():
 	return render_template('index.html')

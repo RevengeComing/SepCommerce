@@ -18,3 +18,30 @@ body {
 .top-bar-section .dropdown li:not(.has-form):not(.active) > a:not(.button) {
 	background-color:#383961;
 }
+.medium-block-grid-5 > li:nth-of-type(1n) img{
+	min-height: 266px
+}
+.medium-block-grid-5 > li:nth-of-type(1n) p{
+	min-height: 75px
+}
+#notification {
+    display: none;
+    padding-top: 20px;
+    padding-right: 30px;
+    padding-left : 30px;
+    position: fixed;
+    border-radius: 10px;
+    top:10px;
+    left: 39%;
+    height: 70px;
+    z-index: 1051;
+}
+.alert-info {
+    background-color: #D5E0FF;
+}
+.alert-success {
+    background-color: #D5FFD7;
+}
+.alert-warning {
+    background-color: #FFD5D5;
+}

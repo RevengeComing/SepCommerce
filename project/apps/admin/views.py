@@ -1,13 +1,16 @@
 from flask import render_template, flash, redirect, url_for, request
 from project.apps.main.decorators import admin_required
 from project.apps.auth.models import User, Role
+from project.apps.ecommerce.models import Product, City
 from project.extensions import db
 from . import mod
 
 @mod.route('/panel')
 @admin_required
 def index():
-	return render_template('admin/index.html')
+	products_count = Product.query.count()
+	cities_count = City.query.count()
+	return render_template('admin/index.html', products_count=products_count, cities_count=cities_count)
 
 
 @mod.route('/edit_user/<user_id>', methods=[ 'GET', 'POST'])

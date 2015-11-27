@@ -33,6 +33,12 @@ def deploy():
     # create user roles
     Role.insert_roles()
 
+@manager.command
+def change_pass(user, password):
+    user = User.query.filter_by(username=user).first()
+    user.password = password
+    db.session.commit()
+    print "password changed for user with mail %s" % user.email 
 
 if __name__ == '__main__':
     manager.run()

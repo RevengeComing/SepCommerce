@@ -65,11 +65,11 @@
     	<hr>
     	<ul class="medium-block-grid-5 small-block-grid-2">
     		{% for product in index_products() %}    			
-		  	<li>
-		  		<img class="th" src="{{product.image}}">
-		  		<p>{{product.name}}</p>
+		  	<li class="products-li">
+		  		<a href="{{product.self_url()}}"><img class="th" src="{{product.get_image()}}"></a>
+		  		<a href="{{product.self_url()}}"><p>{{product.name}}</p></a>
 		  		<p>{{product.price}} Rial</p>
-		  		<a href="#" class="button" title="">Add To Basket</a>
+		  		<a data-url="{{product.addto_basket_url()}}" class="button add-to-basket" title="">Add To Basket</a>
 		  	</li>
 
     		{% endfor %}

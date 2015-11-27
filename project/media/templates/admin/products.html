@@ -23,7 +23,7 @@
 	    	<th>{{ product.price }}</th>
 	    	<th>{{ product.count }}</th>
 	    	<th>{{ product.offer }}</th>
-	    	<th style="max-width:100px"><img src="{{product.image}}" alt=""></th>
+	    	<th style="max-width:100px"><img src="{{product.get_image()}}" alt=""></th>
 	  	</tr>
     	{% endfor %}
 	</table>

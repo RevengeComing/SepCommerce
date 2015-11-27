@@ -6,7 +6,7 @@
 <div class="row">
 	<div class="medium-3 columns">
 		<ul class="side-nav">
-		  <li><a href="{{url_for('admin.index')}}">Panel</a></li>
+		  <li><a href="{{url_for('admin.index')}}">Dashboard</a></li>
 		  <li><a href="{{url_for('admin.categories')}}">Categories</a></li>
 		  <li><a href="{{url_for('admin.products')}}">Products</a></li>
 		  <li><a href="{{url_for('admin.user_list')}}">Users</a></li>
@@ -15,7 +15,7 @@
 		</ul>		
 	</div>
 	<div class="medium-9 columns">
-	{% block admin_content %}{%  endblock %}		
+	{% block admin_content %}{%  endblock %}
 	</div>
 </div>
 {% endblock %}

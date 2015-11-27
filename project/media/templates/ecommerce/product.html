@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+	
+	<img class="th" src="{{product.get_image()}}">
+	<p>{{product.name}}</p>
+	<p>{{product.price}} Rial</p>
+	<a href="#" class="button" title="">Add To Basket</a>
+{% endblock %}

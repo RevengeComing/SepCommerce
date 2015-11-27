@@ -1,7 +1,39 @@
 {% extends "admin/base.html" %}
 
 {% block admin_content %}
-<h2>Welcome to admin panel !</h2>
+<hr>
+<div class="row">
+	<div class="medium-6 columns">
+		<div class="panel">
+			<p>Product Count: {{products_count}}</p>
+		</div>
+	</div>
+	<div class="medium-6 columns">
+		<div class="panel">
+			<p>Cities UnderCover Count: {{cities_count}}</p>
+		</div>
+	</div>
+	<div class="medium-6 columns">
+		<div class="panel">
+			<p>Today Sale: 0.0 Rial</p>
+		</div>
+	</div>
+	<div class="medium-6 columns">
+		<div class="panel">
+			<p>Orders Not Delivered: 0</p>
+		</div>
+	</div>
+	<div class="medium-6 columns">
+		<div class="panel">
+			<p>Todays Orders Delivered: 0</p>
+		</div>
+	</div>
+	<div class="medium-6 columns">
+		<div class="panel">
+			<p>Total Orders: 0</p>
+		</div>
+	</div>
+</div>
 
 {% endblock %}
 
