@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+	<h1>Basket</h1>
+	<nav id="toppest" class="top-bar" data-topbar role="navigation">
+
+      <section class="top-bar-section">
+        <ul class="left">
+            <li class="has-dropdown">
+                <a href="#">Browse Store</a>
+                <ul class="dropdown">
+                    <li><a href="#">All Products</a></li>
+                    <li><a href="#">Offers</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="right">
+        	<li><input type="text" placeholder="Search"></input></li>
+        	
+        	<li><button>Search</button></li>
+        </ul>
+      </section>
+    </nav>
+    <div class="small-12 columns" id="index-inside">
+    	<hr>
+    	{% for product in basket.products %}
+    	<div class='basket-items row'>
+
+	    	<div class="medium-2 columns">
+		  		<img class="th" src="{{product.product.get_image()}}">
+	    		
+	    	</div>
+	    	<div class="medium-10 columns">
+	    		<p>{{product.name}}</p>
+		  		<p>{{product.total_price()}} Rial</p>	
+		  		<p> count : {{product.count}}</p>		
+	    	</div>	
+    	</div>
+    	{% endfor %}
+		</ul>
+    </div>
+{% endblock content %}

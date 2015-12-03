@@ -1,11 +1,14 @@
 $(function() {
 
 	$('.add-to-basket').click(function(){
+        var price = $(this).data('price')
 		$.ajax({
 			'url':$(this).data('url'),
 			success:function(response){
-                if (response == "success"){
-                	ajax_notification("Product Added To Basket ...", 'success', 3000)
+                if (response.status == "success"){
+                    console.log($(this).data('price'));
+                	ajax_notification("Product Added To Basket ...", 'success', 3000);
+                    $('#basket-price-amount').html(parseInt($('#basket-price-amount').text())+price);
                 }
             },
             start:function(){

@@ -43,5 +43,6 @@ class DeploymentConfig(DefaultConfig):
 
 class DevelopmentConfig(DefaultConfig):
     POSTGRES_HOST =  '127.0.0.1'
-    SQLALCHEMY_DATABASE_URI = 'postgres://sepehr:1234@%s/sepCommerce' % POSTGRES_HOST
+    SQLALCHEMY_DATABASE_URI = 'sqlite:////Users/sepehr/Documents/Work/flask/SepCommerce/db.sqlite'
+    # SQLALCHEMY_DATABASE_URI = 'postgres://sepehr:1234@%s/sepCommerce' % POSTGRES_HOST
     DEBUG = True

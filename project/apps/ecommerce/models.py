@@ -64,16 +64,24 @@ class Basket(db.Model):
 	user = db.relationship('User', backref='basket', lazy="joined")
 
 	def add_product(self, id, count):
-		product_in_basket = ProductInBasket(basket_id=self.id,
-											product_id=id,
-											count=count)
+		product_in_basket = ProductInBasket.query.filter_by(basket_id=self.id,
+														product_id=id).first()
+		if not product_in_basket:
+			product_in_basket = ProductInBasket(basket_id=self.id,
+												product_id=id,
+												count=count)
+		else:
+			product_in_basket.count += count
 		db.session.add(product_in_basket)
 
 	def total_price(self):
 		price = 0
 		for product in self.products:
-			price += product.count * product.price
+			price += product.total_price()
 		return price
+
+	def get_products(self):
+		return ProductInBasket.query.filter_by(basket_id=self.id).all()
 
 
 class City(db.Model):
@@ -91,3 +99,13 @@ class ProductInBasket(db.Model):
 
 	basket = db.relationship('Basket', backref='products', lazy='joined')
 	product = db.relationship('Product', lazy='joined')
+
+	def total_price(self):
+		return self.count * self.product.price
+
+
+def remove_cart(resp):
+    id = request.cookies.get('shopping_cart')
+    if id:
+        resp.set_cookie('shopping_cart', '', expires=0)
+        Basket.query.filter_by(id=id).delete()

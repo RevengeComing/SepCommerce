@@ -24,14 +24,27 @@ manager.add_command('db', MigrateCommand)
 @manager.command
 def deploy():
     """Run deployment tasks."""
-    from flask.ext.migrate import upgrade
+    from flask.ext.migrate import upgrade, migrate
     from project.apps.auth.models import Role, User
 
     # migrate database to latest revision
-    upgrade()
+    migrate();upgrade()
 
     # create user roles
     Role.insert_roles()
+
+
+@manager.command
+def create_user(username, password, role):
+    role = Role.query.filter_by(name=role).first()
+    user = User(username=username,
+                confirmed=True,
+                role_id=role.id)
+    user.password = password
+    db.session.add(user)
+    db.session.commit()
+    print "User Created..."
+
 
 @manager.command
 def change_pass(user, password):

@@ -45,3 +45,6 @@ body {
 .alert-warning {
     background-color: #FFD5D5;
 }
+.basket-items .th {
+    max-height: 200px;
+}

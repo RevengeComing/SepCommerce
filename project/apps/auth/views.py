@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, url_for, flash, current_app
+from flask import render_template, redirect, request, url_for, flash, current_app, make_response
 from flask.ext.login import login_user, logout_user, login_required, \
     current_user
 from . import mod
@@ -7,6 +7,7 @@ from .models import User
 from ..email import send_email
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm, \
  PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm
+from project.apps.ecommerce.models import remove_cart, Basket
 
 
 @mod.before_app_request
@@ -32,8 +33,27 @@ def login():
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             if current_user.role.name == 'Administrator':
-                return redirect(url_for('admin.index'))
-            return redirect(request.args.get('next') or url_for('main.index', username=current_user.username))
+                resp = make_response(redirect(url_for('admin.index')))
+                remove_cart(resp)
+                return resp
+            resp = make_response(redirect(request.args.get('next') or url_for('main.index', username=current_user.username)))
+            id = request.cookies.get('shopping_cart')
+            if id:
+                user_cart = Basket.query.filter_by(user_id=user.id).first()
+                if user_cart:
+                    resp.set_cookie('shopping_cart', '', expires=0)
+                    cart = Basket.query.filter_by(id=id).first()
+                    for product in cart.products:
+                        product.basket_id = user_cart.id
+                    db.session.commit()
+                    db.session.delete(cart)
+                else:
+                    resp.set_cookie('shopping_cart', '', expires=0)
+                    cart = Basket.query.filter_by(id=id).first()
+                    cart.user_id = user.id
+                    user.basket_id = id
+                    db.session.commit()
+            return resp
         else:
             return render_template('auth/login.html',
                                    form=form,
@@ -45,7 +65,9 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(request.referrer or url_for('main.index')) 
+    resp = make_response(redirect(request.referrer or url_for('main.index')))
+    # resp.set_cookie('shopping_cart', '', expires=0)
+    return resp
 
 
 @mod.route('/register', methods=['GET', 'POST'])

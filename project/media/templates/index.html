@@ -64,12 +64,12 @@
     <div class="medium-12 columns" id="index-inside">
     	<hr>
     	<ul class="medium-block-grid-5 small-block-grid-2">
-    		{% for product in index_products() %}    			
+    		{% for product in index_products() %}
 		  	<li class="products-li">
 		  		<a href="{{product.self_url()}}"><img class="th" src="{{product.get_image()}}"></a>
 		  		<a href="{{product.self_url()}}"><p>{{product.name}}</p></a>
 		  		<p>{{product.price}} Rial</p>
-		  		<a data-url="{{product.addto_basket_url()}}" class="button add-to-basket" title="">Add To Basket</a>
+		  		<a data-price="{{product.price}}" data-url="{{product.addto_basket_url()}}" class="button add-to-basket" title="">Add To Basket</a>
 		  	</li>
 
     		{% endfor %}
