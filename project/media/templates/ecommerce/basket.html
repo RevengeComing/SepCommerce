@@ -24,20 +24,22 @@
     </nav>
     <div class="small-12 columns" id="index-inside">
     	<hr>
-    	{% for product in basket.products %}
-    	<div class='basket-items row'>
+    	{% if basket %}
+	    	{% for product in basket.products %}
+	    	<div class='basket-items row'>
 
-	    	<div class="medium-2 columns">
-		  		<img class="th" src="{{product.product.get_image()}}">
-	    		
+		    	<div class="medium-2 columns">
+			  		<img class="th" src="{{product.product.get_image()}}">
+		    		
+		    	</div>
+		    	<div class="medium-10 columns">
+		    		<p>{{product.name}}</p>
+			  		<p>{{product.total_price()}} Rial</p>	
+			  		<p> count : {{product.count}}</p>		
+		    	</div>	
 	    	</div>
-	    	<div class="medium-10 columns">
-	    		<p>{{product.name}}</p>
-		  		<p>{{product.total_price()}} Rial</p>	
-		  		<p> count : {{product.count}}</p>		
-	    	</div>	
-    	</div>
-    	{% endfor %}
+	    	{% endfor %}    		
+    	{% endif %}
 		</ul>
     </div>
 {% endblock content %}
