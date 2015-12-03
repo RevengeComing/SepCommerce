@@ -42,6 +42,7 @@ def addto_basket(id):
 @mod.route('/basket')
 def current_basket():
     if current_user.is_authenticated:
+        print "asdasd"
         basket = Basket.query.filter_by(user_id=current_user.id).first()
     else:
         basket = Basket.query.filter_by(id=request.cookies.get('shopping_cart')).first()

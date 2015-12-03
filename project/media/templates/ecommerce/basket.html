@@ -38,7 +38,9 @@
 			  		<p> count : {{product.count}}</p>		
 		    	</div>	
 	    	</div>
-	    	{% endfor %}    		
+	    	{% endfor %}
+        {% else %}
+        <h1>Your Basket Is Empty !</h1>    
     	{% endif %}
 		</ul>
     </div>
