@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block basket_header %}
+    
+{% endblock basket_header %}
+
 {% block content %}
 <div class="row">
 	<h1>Basket</h1>
@@ -32,11 +36,17 @@
 			  		<img class="th" src="{{product.product.get_image()}}">
 		    		
 		    	</div>
-		    	<div class="medium-10 columns">
+		    	<div class="medium-4 columns">
 		    		<p>{{product.name}}</p>
-			  		<p>{{product.total_price()}} Rial</p>	
-			  		<p> count : {{product.count}}</p>		
-		    	</div>	
+			  		<p>{{product.total_price()}} Rial</p>
+                    <a href="{{ url_for('commerce.remove_from_basket', product_id=product.product.id) }}" title="">Remove</a>
+		    	</div>
+                <div class="medium-4 columns product_in_basket">
+                    <label>Count : </label>
+                    <input type="number" name="product_count" value="{{product.count}}">
+                    <input type="hidden" name="product_id" value="{{product.product.id}}">
+                    <button type="submit">Update</button>     
+                </div>
 	    	</div>
 	    	{% endfor %}
         {% else %}
@@ -44,4 +54,21 @@
     	{% endif %}
 		</ul>
     </div>
+
+<script type="text/javascript" charset="utf-8" async defer>
+$(function(){
+    $('.product_in_basket button').click(function(){
+        data = { 'product_id':$(this).prev().val(), 'product_count':$(this).prev().prev().val()}
+        $.ajax({
+            data:data,
+            method:"POST",
+            url:'/shop/update_basket',
+            success:function(resp){
+                if (resp == "success") { location.reload(); } 
+                else { ajax_notification("Something Went Wrong ... ", "warning", 5000); }
+            }
+        });
+    });
+})    
+</script>
 {% endblock content %}

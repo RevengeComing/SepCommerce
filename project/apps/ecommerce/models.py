@@ -83,6 +83,18 @@ class Basket(db.Model):
 	def get_products(self):
 		return ProductInBasket.query.filter_by(basket_id=self.id).all()
 
+	def update_product(self, id, count):
+		product_in_basket = ProductInBasket.query.filter_by(basket_id=self.id,
+														product_id=id).first()
+		product_in_basket.count = count
+		db.session.commit()
+
+	def remove_from_basket(self, id):
+		product_in_basket = ProductInBasket.query.filter_by(basket_id=self.id,
+														product_id=id).delete()
+		db.session.commit()
+
+
 
 class City(db.Model):
 	__tablename__ = "cities"

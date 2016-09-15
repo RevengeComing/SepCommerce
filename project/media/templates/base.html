@@ -87,14 +87,15 @@
                         </ul>
                     </li>
                 </ul>     
-                {% endif %}      
-                {{header_basket(get_cart())}}
+                {% endif %}
             {% else %}
             <ul class="left">
                 <li><a href="{{url_for('auth.login')}}" title="">Login/Register</a></li>
             </ul>
-            {{header_basket(get_cart())}}
             {% endif %}
+            {% block basket_header %}
+            {{header_basket(get_cart())}}
+            {% endblock basket_header %}
           </section>
         </nav>
         {% block content %}{% endblock %}
